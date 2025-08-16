@@ -6,10 +6,10 @@ export default async function handler(req, res) {
   const { nome, idade } = req.body;
 
   const client = new Client({
-    host: "SEU-HOST-SUPABASE",
-    user: "SEU-USER",
-    password: "SUA-PASSWORD",
-    database: "SEU-DATABASE",
+    host: "db.xrotdtixcursvltionue.supabase.co",
+    user: "postgres",
+    password: "palavrapassedabasededados",
+    database: "postgres",
     port: 5432,
     ssl: { rejectUnauthorized: false }
   });
