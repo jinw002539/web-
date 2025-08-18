@@ -2,6 +2,18 @@ import postgres from 'pg';
 const { Client } = postgres;
 
 export default async(req, res) => {
+
+    console.log("\n=== DEBUG INICIAL ===");
+    console.log("Variáveis carregadas:", {
+        host: process.env.POSTGRES_HOST,
+        user: process.env.POSTGRES_USER ? .slice(0, 3) + '...', // Mostra só os 3 primeiros chars
+        database: process.env.POSTGRES_DATABASE,
+        port: process.env.POSTGRES_PORT,
+        ssl: process.env.POSTGRES_URL ? .includes('sslmode=require') ? 'Ativado' : 'Desativado'
+    });
+    console.log("URL encurtada:", process.env.POSTGRES_URL ? .split('@')[1] ? .split('/')[0] || 'Não encontrada');
+    console.log("=== FIM DEBUG ===\n");
+
     if (req.method !== 'POST') {
         return res.status(405).json({ error: 'Método não permitido' });
     }
@@ -11,6 +23,7 @@ export default async(req, res) => {
         connectionString: process.env.POSTGRES_URL + "?sslmode=require",
         ssl: { rejectUnauthorized: false }
     });
+
 
     try {
         await client.connect();
